@@ -7,6 +7,7 @@
 #' @param groupByTime whether to group covariates across time points
 #' @param typeIerr acceptable type I error rate
 #' @param typeIIerr acceptable type II error rate
+#' @param maxIter maximum iterations for truncated lasso
 #' @param weights weights for adaptive lasso
 #' @param thresholdConstant constant used to compute threshold
 #' @param refit whether to refit a linear regression after initial thresholding
@@ -35,6 +36,7 @@ ngc <-
     groupByTime = FALSE, #whether to group covariates across time points
     typeIerr = NULL, #acceptable type I error rate; if provided, error-based lasso is fitted
     typeIIerr = 0.1, #acceptable type II error rate
+    maxIter = 200, #maximum iterations for truncated lasso
     weights = NULL, #wmatrix of weights for Alasso. If no weights are provided, use regular lasso.
     thresholdConstant = NULL, #constant used for calculating threshold value
     refit = FALSE, #whether to refit a linear regression after initial thresholding
@@ -148,7 +150,7 @@ ngc <-
       else if (estMethod == "truncate")
       {
         fit <- grangerTlasso(X, d = d, group = group, typeIerr = typeIerr,
-                             typeIIerr = typeIIerr, weights = weights)
+                             typeIIerr = typeIIerr, maxIter=maxIter, weights = weights)
       }
       
       else #threshold
