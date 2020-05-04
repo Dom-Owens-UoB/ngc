@@ -25,7 +25,7 @@ grangerTlasso <-
     tol = 1e-2,				#tolerance, for BR alg
     thresh = 1e-4,		#values smaller than thresh are set to zero
     initialEst=NULL, 	#initial estimate for BR alg
-    maxIter=100				#maximum iteration for the BR alg
+    maxIter=200				#maximum iteration for the BR alg
   ){
     ####### START OF FN #######
     n <- dim(X)[1]
