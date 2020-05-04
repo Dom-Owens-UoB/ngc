@@ -8,6 +8,7 @@
 #' @param typeIerr acceptable type I error rate
 #' @param typeIIerr acceptable type II error rate
 #' @param maxIter maximum iterations for truncated lasso
+#' @param eps epsilon, used for truncating penalty
 #' @param weights weights for adaptive lasso
 #' @param thresholdConstant constant used to compute threshold
 #' @param refit whether to refit a linear regression after initial thresholding
@@ -37,6 +38,7 @@ ngc <-
     typeIerr = NULL, #acceptable type I error rate; if provided, error-based lasso is fitted
     typeIIerr = 0.1, #acceptable type II error rate
     maxIter = 200, #maximum iterations for truncated lasso
+    eps = 0.5, #epsilon, used for truncating penalty
     weights = NULL, #wmatrix of weights for Alasso. If no weights are provided, use regular lasso.
     thresholdConstant = NULL, #constant used for calculating threshold value
     refit = FALSE, #whether to refit a linear regression after initial thresholding
@@ -150,7 +152,7 @@ ngc <-
       else if (estMethod == "truncate")
       {
         fit <- grangerTlasso(X, d = d, group = group, typeIerr = typeIerr,
-                             typeIIerr = typeIIerr, maxIter=maxIter, weights = weights)
+                             typeIIerr = typeIIerr, maxIter=maxIter, eps = 0.5, weights = weights)
       }
       
       else #threshold
